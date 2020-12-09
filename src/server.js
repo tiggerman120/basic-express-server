@@ -21,33 +21,36 @@ app.get('/', (req, res) => {
 
 
 
-app.get('/person', (req, res, next) => {
+app.get('/person', validator, (req, res, next) => {
+  console.log('made it!:');
+  
   let output = {
     name: req.query.name
     }
     res.status(200).json(output);
 });
 
-//param
-app.get('/person/:name', (req, res) => {
-  let output = {
-    name: req.params.name
-  }
-  res.status(200).json(output);
-});
+// //param
+// app.get('/person/:name', (req, res) => {
+//   let output = {
+//     name: req.params.name
+//   }
+//   res.status(200).json(output);
+// });
 
 //body
-app.post('person', (req, res) => {
-  console.log('What got added? ', req.body);
-  res.status(200).send('ok');
-});
+// app.post('person', (req, res) => {
+//   console.log('What got added? ', req.body);
+//   res.status(200).send('ok');
+// });
 
 //update the body
 app.put('/person',)
 
 app.use(logRequest);
 
-app.use('*', notFoundHandler);
+app.use(errorHandler);
+app.use('*', notFoundHandler)
 
 function start(PORT) {
   app.listen(PORT, () => {

@@ -1,11 +1,15 @@
 'use strict';
-
+const errorHandler = require('.././error-handlers/500');
 function validator(req, res, next) {
   if (req.query.name) {
-    res.status(200).json(req.query);
+    next();
   } else {
-    next('req query doesnt contain a name');
+    next('requires a name');
   }
 }
+
+// function valRequest(req, res, next) {
+//   if
+// }
 
 module.exports = validator;
