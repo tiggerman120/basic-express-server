@@ -10,9 +10,10 @@ const notFoundHandler = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
 const validator = require('./middleware/validator');
 const logRequest = require('./middleware/logger')
-//body parser than accepts json
+//body parser that accepts json
 app.use(express.json());
 
+app.use(logRequest);
 //home route
 app.get('/', (req, res) => {
   res.status(200).send('Hello World');
@@ -47,7 +48,6 @@ app.get('/person', validator, (req, res, next) => {
 //update the body
 app.put('/person',)
 
-app.use(logRequest);
 
 app.use(errorHandler);
 app.use('*', notFoundHandler)
@@ -62,3 +62,14 @@ module.exports = {
   server: app,
   start: start
 }
+
+
+// module.exports = {
+//   server: app,
+//   start: port => {
+//     if(!port) { throw new Error('missing port');}
+//     app.listen(PORT, () => {
+//       console.log(`listening on ${PORT}`);
+//     })
+//   }
+// }
